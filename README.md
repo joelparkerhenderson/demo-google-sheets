@@ -22,7 +22,38 @@ We want:
 Example of what we want to write:
 
 ```
-=SHIFT(query(Sheet1!A:Z, "select SUM("&COLN("sheet1","amount")&")"))
+=SHIFT(query(Sheet1!A:Z, "
+select SUM("&COLN("sheet1","amount")&")
+"))
+```
+
+## Remove auto-generated headers
+
+To remove the automatically generated header row from a result when using a data manipulation function with QUERY, set an empty LABEL for each of the data manipulation functions.
+
+Example:
+
+```
+=query(Sheet1!A:Z, "
+select SUM("&COLN("sheet1","amount")&") 
+ label SUM("&COLN("sheet1","amount")&") ''
+")
+
+Set an empty LABEL to each instance of data manipulation, i.e. AVG(C). When all headers are empty, Google Sheets prints out a range with no headers.
+
+Real-world example:
+
+```
+=query(Transactions!A:Z, "
+select 
+  YEAR("&COLN("transactions", "date")&"), 
+  SUM("&COLN("transactions", "amount")&") 
+group by 
+  YEAR("&COLN("transactions", "date")&")
+label 
+  SUM("&COLN("transactions", "amount")&") '',
+  YEAR("&COLN("transactions", "date")&") ''
+")
 ```
 
 ## Named functions
