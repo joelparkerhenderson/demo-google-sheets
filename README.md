@@ -3,7 +3,18 @@
 Demonstration of Google Sheets.
 
 
-## Demo
+## Create a typical sheet
+
+Freeze Row 1:
+
+* Click on the first row indicator "1". This selects all of row 1.
+
+* Menu → View → Freeze → 1 Row. This sets row 1 as the header row, so it stays in place when the sheet moves or is sorted.
+  
+* Ribbon → B for Bold. This makes the row text bold, so it's easier for people to understand that the row is a header.
+
+
+## Calculate a sum
 
 We want to calculate the sum of transaction amounts.
 
@@ -11,7 +22,7 @@ We have:
 
 * Sheet1 is a typical sheet. 
   
-* The first row is header names. 
+* The first row is header names and is frozen.
 
 * One of the header names is "Amount".
 
@@ -84,6 +95,20 @@ Example:
 
 ```
 =COLN("Sheet1","Id") => 1
+```
+
+### X
+
+X marks the spot.
+
+```
+=COLN(REGEXEXTRACT(s, "^(\w+?)!"),REGEXEXTRACT(s, "!(\w+)"))
+```
+
+Example:
+
+```
+=X("Sheet1!Id") => Col1
 ```
 
 ### SHIFT
